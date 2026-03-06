@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Employee Profile Generator</title>
+    <title>Hofilena Hospital Profile Generator</title>
     <style>
       :root {
         --hospital-green: #00682f;
@@ -37,7 +37,7 @@
       }
 
       .container {
-        max-width: 500px;
+        max-width: 550px;
         width: 90%;
         margin: 2rem auto;
         background: white;
@@ -50,7 +50,7 @@
       /* Form Styling */
       .input-group {
         text-align: left;
-        margin-bottom: 20px;
+        margin: 20px 0;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
@@ -63,7 +63,7 @@
       }
 
       .input-field label {
-        font-size: 12px;
+        font-size: 11px;
         font-weight: bold;
         color: var(--hospital-green);
         margin-bottom: 4px;
@@ -99,9 +99,11 @@
         transform: scaleX(-1);
         filter: saturate(0.85) contrast(1.1);
       }
+
       #canvas {
         display: none;
       }
+
       #resultPreview {
         width: 280px;
         height: 280px;
@@ -113,8 +115,9 @@
 
       .button-group {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 10px;
+        margin-bottom: 20px;
       }
 
       button,
@@ -126,50 +129,79 @@
         border-radius: 10px;
         font-weight: 600;
         cursor: pointer;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .btn-open {
         background: #444;
       }
+
       .btn-download {
         background: var(--accent-blue);
-        grid-column: span 2;
+        width: 100%;
+        font-size: 16px;
+        padding: 15px;
         margin-top: 10px;
+      }
+
+      input[type="file"] {
+        display: none;
       }
 
       button:disabled {
         background: #ccc;
         cursor: not-allowed;
       }
+
+      /* Disclaimer Box */
+      #disclaimerBox {
+        display: none;
+        background: #fff8e1;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #ffe082;
+        margin: 20px 0;
+        text-align: left;
+        font-size: 12px;
+        color: #5d4037;
+      }
     </style>
   </head>
   <body>
     <div class="header">
       <img src="logo.png" alt="Logo" />
-      <h1 style="display: inline-block; vertical-align: middle">
-        Hospital Profile Generator
-      </h1>
+      <div
+        style="display: inline-block; vertical-align: middle; text-align: left"
+      >
+        <div style="font-size: 1.4rem; font-weight: bold; line-height: 1.2">
+          Hofilena Hospital FB Frame Generator
+        </div>
+        <div style="font-size: 0.9rem; font-weight: normal; opacity: 0.9">
+          38 Years of Celebration
+        </div>
+      </div>
     </div>
 
     <div class="container">
-      <div class="container">
+      <div style="margin-bottom: 20px; font-size: 14px; line-height: 1.5">
         <p>
           🎉 Celebrating 38 Years of Compassionate Care! 🎉 Happy 38th
-          Anniversary to <b>Hofilena Hospital </b>— a milestone of service,
-          healing, and dedication to our community. 
-        <p>
-            📢 Mandatory update: All
-          employees are required to update their profile frame to our official
-          38th Anniversary frame as a sign of unity and pride in our
-          institution. Let’s celebrate this achievement together! 💙</p>
+          Anniversary to <b>Hofilena Hospital</b> — a milestone of service,
+          healing, and dedication to our community.</b>
+        </p>
+        <p style="color: var(--hospital-green); font-weight: bold">
+          📢 <b>Mandatory update:</b> All employees are required to update their
+          profile frame to our official 38th Anniversary frame as a sign of
+          unity and pride in our institution. Let’s celebrate this achievement
+          together! 💙
+
         </p>
       </div>
 
-      <p style="font-size: 14px; color: #666; margin-bottom: 20px">
-        Please fill out your details below before generating your profile. This
-        information is used to log the official issuance of your branded profile
-        picture.
-      </p>
+      <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 20px" />
 
       <div class="input-group">
         <div class="input-field full-width">
@@ -181,8 +213,8 @@
           <input type="text" id="designation" placeholder="Head IT" />
         </div>
         <div class="input-field">
-          <label>AREA / DEPT / Others</label>
-          <input type="text" id="area" placeholder="HH / HMC / FAN of HH" />
+          <label>AREA / DEPT</label>
+          <input type="text" id="area" placeholder="HH / HMC / FAN" />
         </div>
         <div class="input-field full-width">
           <label>BIRTHDAY</label>
@@ -193,38 +225,104 @@
       <div class="circle-viewport" id="viewport">
         <video id="camera" autoplay playsinline></video>
       </div>
-
       <img id="resultPreview" />
 
       <div class="button-group">
         <button class="btn-open" id="startBtn" onclick="startCamera()">
-          Open Camera
+          Camera
         </button>
         <label class="file-label"
-          >Upload<input type="file" id="upload" accept="image/*"
+          >Upload <input type="file" id="upload" accept="image/*"
         /></label>
         <button onclick="capture()">Capture</button>
-        <button
-          class="btn-download"
-          id="dlBtn"
-          onclick="download()"
-          style="display: none"
-        >
-          Download & Log
-        </button>
       </div>
+
+      <div id="disclaimerBox">
+        <h4 style="margin-top: 0; color: #795548; font-size: 14px">
+          📄 Data Privacy Disclaimer
+        </h4>
+        <p>
+          By using this generator, I hereby authorize
+          <b>Hofilena Hospital</b> to collect and process my personal data
+          (Name, Designation, Area, and Photo) for the purpose of logging the
+          official issuance of this frame.
+        </p>
+        <label
+          style="
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--hospital-green);
+            margin-top: 10px;
+          "
+        >
+          <input
+            type="checkbox"
+            id="privacyConsent"
+            style="margin-right: 10px; width: 18px; height: 18px"
+          />
+          I agree to the Data Privacy Terms.
+        </label>
+      </div>
+
+      <button
+        class="btn-download"
+        id="dlBtn"
+        onclick="download()"
+        style="display: none"
+      >
+        Download & Log Profile
+      </button>
 
       <canvas id="canvas"></canvas>
     </div>
 
+    <footer
+      style="
+        background: #fff;
+        padding: 20px;
+        width: 100%;
+        border-top: 1px solid #ddd;
+        font-size: 12px;
+        color: #444;
+        box-sizing: border-box;
+      "
+    >
+      <div
+        style="
+          max-width: 800px;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 20px;
+        "
+      >
+        <div style="text-align: left; color: #888">
+          <div><strong>Version:</strong> 1.0.4-Stable</div>
+          <div><strong>Developer:</strong> IEN (Hofilena Hospital/IT Unit)</div>
+        </div>
+        <div style="text-align: right">
+          <div style="font-weight: bold; color: var(--hospital-green)">
+            Hofileña Hospital
+          </div>
+          <div>📍 F.S Fajares st. Gatas Dist., Pagadian City</div>
+          <div>📱 09338239449 | 📧 infohofilena@gmail.com</div>
+        </div>
+      </div>
+    </footer>
+
     <script>
-      // INSERT YOUR WEBHOOK HERE
       const DISCORD_WEBHOOK_URL =
         "https://discord.com/api/webhooks/1479331939562291270/yMlX9ZRMZzMDVkLCXLBl3ZRysJszPooIMaGRsPFc5HZrW7O4NMPHry4Z2o9Sc-w5ByfQ";
+
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
       const video = document.getElementById("camera");
       const previewImg = document.getElementById("resultPreview");
+      const dlBtn = document.getElementById("dlBtn");
+      const disclaimerBox = document.getElementById("disclaimerBox");
 
       const exportSize = 1080;
       canvas.width = exportSize;
@@ -239,7 +337,7 @@
             video: { facingMode: "user", width: 1280, height: 720 },
           });
           video.srcObject = stream;
-          document.getElementById("startBtn").innerText = "Camera Active";
+          document.getElementById("startBtn").innerText = "Active";
         } catch (err) {
           alert("Camera access denied.");
         }
@@ -291,7 +389,10 @@
         previewImg.src = canvas.toDataURL("image/png");
         previewImg.style.display = "block";
         document.getElementById("viewport").style.display = "none";
-        document.getElementById("dlBtn").style.display = "block";
+
+        // SHOW THE HIDDEN PARTS
+        disclaimerBox.style.display = "block";
+        dlBtn.style.display = "block";
       }
 
       document.getElementById("upload").onchange = (e) => {
@@ -302,7 +403,7 @@
 
       function capture() {
         if (video.srcObject) drawFullProcess(video);
-        else alert("Turn on camera first!");
+        else alert("Please open camera first!");
       }
 
       async function logToDiscord() {
@@ -310,11 +411,6 @@
         const design = document.getElementById("designation").value || "N/A";
         const area = document.getElementById("area").value || "N/A";
         const bday = document.getElementById("birthday").value || "N/A";
-
-        if (name === "N/A") {
-          alert("Please at least enter a name before downloading!");
-          return false;
-        }
 
         const payload = {
           username: "Hospital Profile Bot",
@@ -327,46 +423,54 @@
                 { name: "🏥 Designation", value: design, inline: true },
                 { name: "📍 Area/Dept", value: area, inline: true },
                 { name: "🎂 Birthday", value: bday, inline: true },
-                {
-                  name: "📱 Device",
-                  value: navigator.userAgent.includes("Mobi")
-                    ? "Mobile"
-                    : "Desktop",
-                  inline: true,
-                },
               ],
               timestamp: new Date().toISOString(),
             },
           ],
         };
 
-        await fetch(DISCORD_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        return true;
+        try {
+          await fetch(DISCORD_WEBHOOK_URL, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          return true;
+        } catch (e) {
+          return false;
+        }
       }
 
-      // ... (rest of the code remains the same as previous) ...
       async function download() {
-    const name = document.getElementById("fullName").value;
-    if(!name) {
-        alert("Please enter your name first!");
-        return;
-    }
+        const name = document.getElementById("fullName").value;
+        const consent = document.getElementById("privacyConsent").checked;
 
-    // 1. Log to Discord First
-    const success = await logToDiscord();
+        if (!name) {
+          alert("⚠️ Please enter your Full Name.");
+          return;
+        }
+        if (!consent) {
+          alert("⚠️ You must agree to the Data Privacy Terms.");
+          return;
+        }
 
-    // 2. Then trigger the actual download for the user
-    if(success) {
-        const link = document.createElement("a");
-        link.download = `Hospital_Profile_${name.replace(/\s+/g, '_')}.png`;
-        link.href = canvas.toDataURL("image/png", 1.0);
-        link.click();
-    }
-}
+        dlBtn.innerText = "Syncing...";
+        dlBtn.disabled = true;
+
+        const success = await logToDiscord();
+
+        if (success) {
+          const link = document.createElement("a");
+          link.download = `Profile_${name.replace(/\s+/g, "_")}.png`;
+          link.href = canvas.toDataURL("image/png", 1.0);
+          link.click();
+          alert("✅ Success! Profile downloaded and logged.");
+        } else {
+          alert("❌ Connection error. Please try again.");
+        }
+        dlBtn.innerText = "Download & Log Profile";
+        dlBtn.disabled = false;
+      }
     </script>
   </body>
 </html>
