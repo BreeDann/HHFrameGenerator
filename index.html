@@ -343,6 +343,23 @@
         }
       }
 
+      (function () {
+          const ua = navigator.userAgent || navigator.vendor || window.opera;
+          const isMessenger = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Instagram") > -1);
+
+          if (isMessenger) {
+            // 1. Android Force Open (Intent)
+            if (/Android/i.test(ua)) {
+              const currentUrl = window.location.href.replace(/https?:\/\//, "");
+              window.location.href = `intent://${currentUrl}#Intent;scheme=https;package=com.android.chrome;end`;
+            }
+            // 2. iOS Instruction (iOS doesn't allow forcing Safari)
+            else {
+              alert("⚠️ For Camera access, please tap the three dots (···) and select 'Open in Safari' to use the Profile Generator.");
+            }
+          }
+        })();
+
       function drawFullProcess(source) {
         let srcWidth = source.videoWidth || source.width;
         let srcHeight = source.videoHeight || source.height;
